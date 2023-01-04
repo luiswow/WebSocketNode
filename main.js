@@ -26,8 +26,9 @@ wss.on("connection", ws => {
     
         if (message.type === 'NEW_MESSAGE') {
           wss.clients.forEach((client) => {
-            console.log(client)
-            if (client !== ws && client.readyState === WebSocketServer.OPEN) {
+
+      console.log("entro una vez")
+            if ( client !== ws && client.readyState === WebSocketServer.OPEN ) {
               client.send(JSON.stringify(JSON.parse(data)));
             }
           });
