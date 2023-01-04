@@ -8,7 +8,7 @@ const wss = new WebSocketServer.Server({ port: process.env.PORT })
 // Creating connection using websocket
 wss.on("connection", ws => {
     console.log("new client connected");
-    ws.send();
+
     
     // sending message
     ws.on("message", data => {
@@ -27,6 +27,7 @@ wss.on("connection", ws => {
         if (message.type === 'NEW_MESSAGE') {
             console.log(message.type)
           wss.clients.forEach((client) => {
+            console.log(client)
             if (client !== ws && client.readyState === WebSocketServer.OPEN) {
               client.send(JSON.stringify(JSON.parse(data)));
             }
